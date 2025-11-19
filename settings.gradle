@@ -1,5 +1,5 @@
-import org.gradle.internal.os.OperatingSystem
-
+import org.gradle.internal.os.OperatingSystem 
+//if error pops up here, remove org and type it again
 pluginManagement {
     repositories {
         mavenLocal()

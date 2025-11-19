@@ -98,11 +98,17 @@ backRightMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPe
 
   @Override
   public void teleopPeriodic() {
-    double drive = controller.getLeftY();
-    drive = (Math.abs(drive) < Constants.JOYSTICK_DEADBAND) ? 0 : drive * Constants.MAX_SPEED_PERCENT;
+double MAX_SPEED_PERCENT;
+    if(controller.getRightBumper()){
+      MAX_SPEED_PERCENT = .8;
+    }else{
+      MAX_SPEED_PERCENT = .3;
+    }
+    double drive = -controller.getLeftY();
+    drive = (Math.abs(drive) < Constants.JOYSTICK_DEADBAND) ? 0 : drive * MAX_SPEED_PERCENT;
 
     double turn = -controller.getRightX();
-    turn = (Math.abs(turn) < Constants.JOYSTICK_DEADBAND) ? 0 : turn * Constants.MAX_SPEED_PERCENT;
+    turn = (Math.abs(turn) < Constants.JOYSTICK_DEADBAND) ? 0 : turn * MAX_SPEED_PERCENT;
 
     frontRightMotor.set(drive - turn);
     backRightMotor.set(drive - turn);
